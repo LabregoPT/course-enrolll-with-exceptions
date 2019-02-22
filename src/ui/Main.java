@@ -1,5 +1,6 @@
 package ui;
 
+import java.util.*;
 import java.util.Scanner;
 
 import customExceptions.QuotaEnrollExceedException;
@@ -7,24 +8,30 @@ import model.Course;
 
 public class Main {
 	public static void main(String[] args) {
-		Course myCourse;
+		Course myCourse = null;
 		Scanner sc = new Scanner(System.in);
-		
 		System.out.println("Welcome to course management");
-		
-		System.out.print("Please enter the total grades amount along the semester: ");
-		int totalGradesAmount = Integer.parseInt(sc.nextLine()); 
-		
-		System.out.print("Please enter the course enrollment capacity: ");
-		int quota = Integer.parseInt(sc.nextLine());
-		
-		System.out.print("Please enter the minimum grade: ");
-		double min = Double.parseDouble(sc.nextLine());
-		
-		System.out.print("Please enter the maximum grade: ");
-		double max = Double.parseDouble(sc.nextLine());
-		
-		myCourse = new Course(totalGradesAmount, max, min, quota);
+		boolean notFinished = true;
+		do {
+			try {
+				System.out.print("Please enter the total grades amount along the semester: ");
+				int totalGradesAmount = Integer.parseInt(sc.nextLine()); 
+				
+				System.out.print("Please enter the course enrollment capacity: ");
+				int quota = Integer.parseInt(sc.nextLine());
+				
+				System.out.print("Please enter the minimum grade: ");
+				double min = Double.parseDouble(sc.nextLine());
+				
+				System.out.print("Please enter the maximum grade: ");
+				double max = Double.parseDouble(sc.nextLine());
+				myCourse = new Course(totalGradesAmount, max, min, quota);
+				notFinished = false;
+			}catch(NumberFormatException e) {
+				System.out.print("There was an error in the input, please try again.\n");
+				notFinished = true;
+			}
+		}while(notFinished);
 		
 		int option;
 		do {

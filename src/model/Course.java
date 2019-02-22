@@ -1,7 +1,6 @@
 package model;
 
-import customExceptions.OutOfRangeGradeException;
-import customExceptions.QuotaEnrollExceedException;
+import customExceptions.*;
 
 public class Course {
 	private double maxGrade;
@@ -11,7 +10,7 @@ public class Course {
 	private int maxQuota;
 	
 	private Student[] studentsEnrolled;
-	
+
 	public Course(int tga, double mx, double mn, int mq) {
 		currentWeek = 1;
 		maxGrade = mx;
@@ -24,7 +23,6 @@ public class Course {
 	
 	public void enroll(String id) throws QuotaEnrollExceedException{
 		int posNewStudent = searchFirstAvailable();
-		
 		if(posNewStudent==-1) {
 			throw new QuotaEnrollExceedException(maxQuota);
 		}else {
